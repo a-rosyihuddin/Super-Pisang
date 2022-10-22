@@ -1,0 +1,8 @@
+Triger PAW
+1. Update jumlahOrder 
+CREATE TRIGGER `update_jml_order` AFTER INSERT ON `order_details` FOR EACH ROW UPDATE orders SET total_order = (SELECT orders.total_order+new.jml_order FROM orders WHERE orders.id=new.id_order),
+total_pembayaran = (SELECT orders.total_pembayaran+new.sub_total FROM orders WHERE orders.id=new.id_order)
+WHERE orders.id=new.id_order
+
+2. Update Status Meja
+CREATE TRIGGER `update_status_meja` AFTER INSERT ON `orders` FOR EACH ROW UPDATE mejas SET status_meja = 'Used' WHERE mejas.no_meja=new.no_meja
