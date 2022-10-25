@@ -9,26 +9,35 @@ use Illuminate\Routing\Controller;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class CustomerController extends Controller
 {
     public function login()
     {
-        $meja = Meja::where('status_meja', 'kosong')->get();
-        return View('login.cusLogin', compact('meja'), ['title' => 'Login']);
+        return View('login.cusLogin', ['title' => 'Login']);
     }
 
-    public function store(StoreCustomerRequest $request)
+    public function storeLogin(StoreCustomerRequest $request)
     {
         $credentials = $request->validate([
-            'nama_cus' => 'required',
-            'no_meja' => 'required'
+            'no_hp' => 'required',
+            'password' => 'required'
         ]);
 
-        $request->session()->regenerate();
-        $request->session()->put('nama_cus', $request->nama_cus);
-        $request->session()->put('no_meja', $request->no_meja);
-        return redirect()->intended(route('cus.home'));
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            $request->session()->put('nama_cus', $request->no_hp);
+            $request->session()->put('no_hp', $request->no_hp);
+            return redirect()->intended(route('cus.home'));
+        }
+
+        return back()->withErrors(['userLoginError' => 'Nomor atau Password anda salah']);
+    }
+
+    public function regis()
+    {
+        return View('login.cusRegis', ['title' => 'Register']);
     }
 
     public function home()

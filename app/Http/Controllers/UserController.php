@@ -39,20 +39,18 @@ class UserController extends Controller
     public function adminAction(Request $request)
     {
         $credentials = $request->validate([
-            'username' => 'required',
+            'no_hp' => 'required',
             'password' => 'required',
         ]);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             if (auth()->user()->level === 'Admin') {
                 return redirect()->intended(route('admin.home'));
-            } else {
-                return redirect()->intended(route('kasir.home'));
             }
         }
 
         return back()->withErrors([
-            'username' => 'Username Atau Password Salah'
+            'adminLoginError' => 'Username Atau Password Salah'
         ]);
     }
 

@@ -29,12 +29,11 @@
         <!-- ======= Header ======= -->
         <header id="header" class="fixed-top">
             <div class="container d-flex align-items-center justify-content-between">
-                <a href="/" class="logo"><b>Krusty Krab</b></a>
+                <a href="/" class="logo"><b>Super Pisang</b></a>
 
                 <nav id="navbar" class="navbar">
                     <ul>
                         <li><a class="nav-link scrollto" href="/">Home</a></li>
-                        <li><a class="nav-link scrollto" href="#ulas">Ulas Kami</a></li>
 
                         <li class="tombol">
                             @if (session()->get('nama_cus'))
