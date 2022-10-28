@@ -21,9 +21,9 @@
                                         @enderror
 
                                         <div class="input-field mb-4 mt-4">
-                                            <span class="far fa-user px-2"></span>
-                                            <input type="text" placeholder="Enter Username" name="username" required
-                                                autofocus value="{{ old('username') }}">
+                                            <span class="far fa-solid fa-user px-2"></span>
+                                            <input type="text" placeholder="Enter Username" name="no_hp" required
+                                                autofocus value="{{ old('no_hp') }}">
                                         </div>
                                     </td>
                                 </tr>

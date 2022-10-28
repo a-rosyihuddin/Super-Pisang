@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['customer'])->group(function () {
+Route::middleware(['auth', 'customer'])->group(function () {
     Route::get('/home', [CustomerController::class, 'home'])->name('cus.home');
     Route::post('/pesan', [OrderController::class, 'pesan'])->name('cus.pesan');
 });

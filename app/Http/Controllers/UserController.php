@@ -42,16 +42,13 @@ class UserController extends Controller
             'no_hp' => 'required',
             'password' => 'required',
         ]);
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            if (auth()->user()->level === 'Admin') {
-                return redirect()->intended(route('admin.home'));
-            }
+            return redirect()->intended(route('admin.home'));
         }
 
-        return back()->withErrors([
-            'adminLoginError' => 'Username Atau Password Salah'
-        ]);
+        return back()->withErrors(['adminLoginError' => 'Username Atau Password Salah']);
     }
 
     public function logout()

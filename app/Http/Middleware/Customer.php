@@ -16,8 +16,8 @@ class Customer
      */
     public function handle(Request $request, Closure $next)
     {
-        // dd('dsa');
-        if (session()->get('nama_cus')) {
+        // dd(auth());
+        if (auth()->user()->level == 'Customer') {
             return $next($request);
         } else {
             return redirect()->route('cus.login');

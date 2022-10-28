@@ -19,6 +19,7 @@
                                     <td>Nomor Handphone</td>
                                     <td>
                                         <div class="input-field mb-1 mt-1">
+                                            <span class="fa-solid fa-user px-2"></span>
                                             <input type="text" placeholder="Nomor Handphone" name="no_hp" required>
                                         </div>
                                     </td>
@@ -28,6 +29,7 @@
                                     <td>Password</td>
                                     <td>
                                         <div class="input-field mb-2 mt-2">
+                                            <span class="fas fa-lock px-2"></span>
                                             <input type="password" placeholder="Password" name="password" required>
                                             </input>
                                         </div>

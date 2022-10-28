@@ -25,11 +25,9 @@ class RedirectIfAuthenticated
                 // dd(Auth::guard($guard)->user()->level);
                 if (Auth::guard($guard)->user()->level == 'Admin') {
                     return redirect(RouteServiceProvider::ADMIN);
-                } elseif (Auth::guard($guard)->user()->level == 'Kasir') {
-                    return redirect(RouteServiceProvider::KASIR);
+                } elseif (Auth::guard($guard)->user()->level == 'Customer') {
+                    return redirect(RouteServiceProvider::CUSTOMER);
                 }
-            } elseif (session()->get('nama_cus')) {
-                return redirect(RouteServiceProvider::HOME);
             }
         }
         return $next($request);

@@ -27,8 +27,6 @@ class CustomerController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            $request->session()->put('nama_cus', $request->no_hp);
-            $request->session()->put('no_hp', $request->no_hp);
             return redirect()->intended(route('cus.home'));
         }
 
@@ -48,7 +46,9 @@ class CustomerController extends Controller
 
     public function logout()
     {
-        session()->forget('nama_cus');
+        auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerate();
         return redirect()->route('cus.login');
     }
 }
