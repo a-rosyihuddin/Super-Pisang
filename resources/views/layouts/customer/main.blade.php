@@ -35,7 +35,8 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     @auth
-                        <a href=""><span class="fa-solid fa-bag-shopping"></a></span>
+                        {{-- Icon Untuk Keranjang --}}
+                        <a href="{{ Route('cus.keranjang') }}"><span class="fa-solid fa-bag-shopping"></span></a>
                     @endauth
                     <li><a class="nav-link scrollto" href="/">Home</a></li>
 

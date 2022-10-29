@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Meja;
 use App\Models\Menu;
-use App\Models\Customer;
+use App\Models\Toping;
 use Illuminate\Routing\Controller;
-use App\Http\Requests\StoreCustomerRequest;
-use App\Http\Requests\UpdateCustomerRequest;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreCustomerRequest;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class CustomerController extends Controller
@@ -41,7 +39,12 @@ class CustomerController extends Controller
     public function home()
     {
         $menu = Menu::all();
-        return View('customer.home', compact('menu'), ['title' => 'Dashboard']);
+        $toping = Toping::all();
+        return View('customer.home',  [
+            'title' => 'Dashboard',
+            'menu' => $menu,
+            'toping' => $toping
+        ]);
     }
 
     public function logout()
@@ -50,5 +53,10 @@ class CustomerController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerate();
         return redirect()->route('cus.login');
+    }
+
+    public function keranjang()
+    {
+        return View('customer.keranjang',['title' => 'Keranjang']);
     }
 }
