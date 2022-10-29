@@ -44,21 +44,20 @@
                                             {{-- <table> --}}
                                             <form action="{{ Route('cus.pesan') }}" method="POST">
                                                 @csrf
-                                                <label for="jml_order">Toping</label><br>
+                                                <label for="toping">Toping</label><br>
                                                 {{-- Menampilkan Toping --}}
-                                                @foreach ($toping as $tp)
-                                                    {{-- <input type="button" class="btn btn-danger"
-                                                        value="{{ $tp->nama_toping }}" style="margin: 1%"> --}}
-
-                                                    <label class="btn btn-block btn-success active"
-                                                        for="toping">{{ $tp->nama_toping }}
-                                                        <input type="checkbox" checked autocomplete="off"
-                                                            data-toggle="toping">
-                                                    </label>
-                                                @endforeach
+                                                <div data-toggle="buttons">
+                                                    @foreach ($toping as $tp)
+                                                        <label class="btn btn-block btn-success active""
+                                                            style="margin: 1%">{{ $tp->nama_toping }}
+                                                            <input type="checkbox" name="{{ $tp->nama_toping }}"
+                                                                autocomplete="off">
+                                                        </label>
+                                                    @endforeach
+                                                </div>
                                                 <br>
                                                 <label for="jml_order">Jumlah</label>
-                                                <input type="number" class="form-control" name="jml_order">
+                                                <input type="number" class="form-control" name="total_order">
                                                 <input type="hidden" class="form-control" name="id_menu"
                                                     value="{{ $row->id }}">
                                                 <button type="submit" class="btn btn-primary"

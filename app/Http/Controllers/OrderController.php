@@ -42,29 +42,33 @@ class OrderController extends Controller
     public function pesan(StoreOrderRequest $request)
     {
         $request->validate([
-            'jml_order' => 'required'
+            'total_order' => 'required'
         ]);
 
+        // session()->forget('id_order');
+        // dd(session()->get('id_order'));
+        $sub_total = $request->total_order * Menu::getHarga($request->id_menu)->first()->harga_menu;
         if (Session::get('id_order') == null) {
             $id = Order::count() + 1;
+            // dd($id);
             session(['id_order' => $id]);
+            // dd(Session::get('id_order'));
             Order::create([
                 'id' => $id,
-                'nama_cus' => Session::get('nama_cus'),
-                'no_meja' => Session::get('no_meja'),
-                'total_order' => 0,
-                'total_pembayaran' => 0,
+                'user_id' => $request->user()->id,
+                'menu_id' => $request->id_menu,
+                'total_order' => $request->total_order,
+                'total_pembayaran' => $sub_total,
                 'tgl_order' => date('Y-m-d'),
                 'status_order' => 'Proses'
             ]);
         }
-        // session()->forget('id_order');
+        // dd(Session::get('id_order'));
         $id_order = Session::get('id_order');
-        $sub_total = $request->jml_order * Menu::getHarga($request->id_menu)->first()->harga_menu;
         OrderDetail::create([
-            'id_order' => $id_order,
+            'order_id' => $id_order,
             'id_menu' => $request->id_menu,
-            'jml_order' => $request->jml_order,
+            'jml_order' => $request->total_order,
             'sub_total' => $sub_total
         ]);
 

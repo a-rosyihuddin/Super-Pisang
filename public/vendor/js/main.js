@@ -224,20 +224,3 @@
   });
 
 })
-
-$('[data-toggle="toping"].btn').on('click', function () {
-    // toggle style
-    $(this).toggleClass('toping');
-
-    // toggle checkbox
-    var $chk = $(this).find('[type=checkbox]');
-    $chk.prop('checked',!$chk.prop('checked'));
-
-    return false;
-});
-
-$('form').on('submit',function(e){
-    // watch form values
-    $('#formValues').html(($('form').serialize()));
-    e.preventDefault();
-});
