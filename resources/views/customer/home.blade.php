@@ -40,32 +40,30 @@
                                             <button type="button" class="btn btn-close" data-dismiss="modal"
                                                 aria-hidden="true"></button>
                                         </div>
-                                        <div class="modal-body">
-                                            <table>
-                                                <form action="{{ Route('cus.pesan') }}" method="POST">
-                                                    @csrf
-                                                    <tr>
-                                                        <td>
-                                                            <label for="jml_order">Toping</label><br>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            {{-- Menampilkan Toping --}}
-                                                            @foreach ($toping as $tp)
-                                                                <input type="button" class="btn btn-danger"
-                                                                    value="{{ $tp->nama_toping }}">
-                                                            @endforeach
-                                                            <label for="jml_order">Jumlah</label>
-                                                            <input type="number" class="form-control" name="jml_order">
-                                                            <input type="hidden" class="form-control" name="id_menu"
-                                                                value="{{ $row->id }}">
-                                                            <button type="submit" class="btn btn-primary"
-                                                                style="margin-top:2%; margin-bottom : 2%;">Tambah</button>
-                                                        </td>
-                                                    </tr>
-                                                </form>
-                                            </table>
+                                        <div class="modal-body" style="flex: 20%">
+                                            {{-- <table> --}}
+                                            <form action="{{ Route('cus.pesan') }}" method="POST">
+                                                @csrf
+                                                <label for="jml_order">Toping</label><br>
+                                                {{-- Menampilkan Toping --}}
+                                                @foreach ($toping as $tp)
+                                                    {{-- <input type="button" class="btn btn-danger"
+                                                        value="{{ $tp->nama_toping }}" style="margin: 1%"> --}}
+
+                                                    <label class="btn btn-block btn-success active"
+                                                        for="toping">{{ $tp->nama_toping }}
+                                                        <input type="checkbox" checked autocomplete="off"
+                                                            data-toggle="toping">
+                                                    </label>
+                                                @endforeach
+                                                <br>
+                                                <label for="jml_order">Jumlah</label>
+                                                <input type="number" class="form-control" name="jml_order">
+                                                <input type="hidden" class="form-control" name="id_menu"
+                                                    value="{{ $row->id }}">
+                                                <button type="submit" class="btn btn-primary"
+                                                    style="margin-top:2%; margin-bottom : 2%;">Tambah</button>
+                                            </form>
                                             <div class="modal-footer">
                                                 <input type="button" class="btn btn-danger" data-dismiss="modal"
                                                     value="Close" />

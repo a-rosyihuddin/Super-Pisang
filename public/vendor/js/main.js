@@ -34,7 +34,7 @@
   }
 
   /**
-   * Easy on scroll event listener 
+   * Easy on scroll event listener
    */
   const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener)
@@ -139,7 +139,7 @@
   });
 
   /**
-   * Initiate glightbox 
+   * Initiate glightbox
    */
   const glightbox = GLightbox({
     selector: '.glightbox'
@@ -175,7 +175,7 @@
   });
 
   /**
-   * Initiate portfolio lightbox 
+   * Initiate portfolio lightbox
    */
   const portfolioLightbox = GLightbox({
     selector: '.portfolio-lightbox'
@@ -217,10 +217,27 @@
   });
 
   /**
-   * Initiate galleery lightbox 
+   * Initiate galleery lightbox
    */
   const galleeryLightbox = GLightbox({
     selector: '.galleery-lightbox'
   });
 
-})()
+})
+
+$('[data-toggle="toping"].btn').on('click', function () {
+    // toggle style
+    $(this).toggleClass('toping');
+
+    // toggle checkbox
+    var $chk = $(this).find('[type=checkbox]');
+    $chk.prop('checked',!$chk.prop('checked'));
+
+    return false;
+});
+
+$('form').on('submit',function(e){
+    // watch form values
+    $('#formValues').html(($('form').serialize()));
+    e.preventDefault();
+});

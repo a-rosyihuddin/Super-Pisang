@@ -27,5 +27,17 @@ class TopingSeeder extends Seeder
             'nama_toping' => 'Keju Kuis',
             'stock' => 4
         ]);
+        Toping::create([
+            'nama_toping' => 'Ini Toping',
+            'stock' => 4
+        ]);
+        Toping::create([
+            'nama_toping' => 'Pokok Toping',
+            'stock' => 4
+        ]);
+        Toping::create([
+            'nama_toping' => 'Toping Terserah',
+            'stock' => 4
+        ]);
     }
 }
