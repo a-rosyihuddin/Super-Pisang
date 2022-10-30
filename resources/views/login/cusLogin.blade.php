@@ -20,7 +20,8 @@
                                     <td>
                                         <div class="input-field mb-1 mt-1">
                                             <span class="fa-solid fa-user px-2"></span>
-                                            <input type="text" placeholder="Nomor Handphone" name="no_hp" required>
+                                            <input type="text" placeholder="Nomor Handphone" name="no_hp" autofocus
+                                                required>
                                         </div>
                                     </td>
                                 </tr>

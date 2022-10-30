@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Models\Order;
 use App\Models\Toping;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreCustomerRequest;
+use App\Models\OrderDetail;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class CustomerController extends Controller
@@ -57,6 +59,17 @@ class CustomerController extends Controller
 
     public function keranjang()
     {
-        return View('customer.keranjang',['title' => 'Keranjang']);
+        // dd(OrderDetail::topingFilter());
+        return View('customer.keranjang', [
+            'title' => 'Keranjang',
+            'orderdetail' => OrderDetail::topingFilter(),
+        ]);
+    }
+    public function riwayat()
+    {
+        return View('customer.riwayat', [
+            'title' => 'Riwayat Order',
+            'order' => Order::all(),
+        ]);
     }
 }

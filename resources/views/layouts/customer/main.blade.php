@@ -36,7 +36,8 @@
                 <ul>
                     @auth
                         {{-- Icon Untuk Keranjang --}}
-                        <a href="{{ Route('cus.keranjang') }}"><span class="fa-solid fa-bag-shopping"></span></a>
+                        <li><a href="{{ Route('cus.keranjang') }}"><span class="fa-solid fa-bag-shopping"></span></a></li>
+                        <li><a href="{{ Route('cus.riwayat') }}">Pesanan</a></li>
                     @endauth
                     <li><a class="nav-link scrollto" href="/">Home</a></li>
 

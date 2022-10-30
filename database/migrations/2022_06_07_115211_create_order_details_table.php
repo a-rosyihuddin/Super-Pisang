@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('id_menu')->constrained('menus')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('menu_id')->constrained('menus')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('jml_order');
             $table->integer('sub_total')->nullable();
+            $table->foreignId('toping_id')->nullable()->constrained('topings')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="section-title">
                     <form class="form-inline ">
-                        <div class="input-field search">
+                        <div class="input-field search" style="margin-top: 2%">
                             <span class="fas fa-search px-2"></span>
                             <input class="form-control" type="text" placeholder="Search" aria-label="Search">
                         </div>
@@ -50,8 +50,8 @@
                                                     @foreach ($toping as $tp)
                                                         <label class="btn btn-block btn-success active""
                                                             style="margin: 1%">{{ $tp->nama_toping }}
-                                                            <input type="checkbox" name="{{ $tp->nama_toping }}"
-                                                                autocomplete="off">
+                                                            <input type="checkbox" name="toping[]"
+                                                                value="{{ $tp->id }}" autocomplete="off">
                                                         </label>
                                                     @endforeach
                                                 </div>

@@ -22,6 +22,7 @@ Route::middleware(['auth', 'customer'])->group(function () {
     Route::get('/home', [CustomerController::class, 'home'])->name('cus.home');
     Route::post('/pesan', [OrderController::class, 'pesan'])->name('cus.pesan');
     Route::get('/keranjang', [CustomerController::class, 'keranjang'])->name('cus.keranjang');
+    Route::get('/riwayat', [CustomerController::class, 'riwayat'])->name('cus.riwayat');
 });
 
 //admin

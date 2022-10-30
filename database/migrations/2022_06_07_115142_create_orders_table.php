@@ -16,11 +16,10 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('menu_id')->constrained('menus')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('total_order');
             $table->integer('total_pembayaran')->nullable();
             $table->date('tgl_order');
-            $table->enum('status_order', ['Proses', 'Belum Bayar', 'Selesai']);
+            $table->enum('status_order', ['Keranjang', 'Proses', 'Siap', 'Selesai']);
             $table->timestamps();
         });
     }

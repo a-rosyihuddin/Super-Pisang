@@ -46,7 +46,7 @@ class OrderController extends Controller
         ]);
 
         // session()->forget('id_order');
-        // dd(session()->get('id_order'));
+        // dd($request->toping);
         $sub_total = $request->total_order * Menu::getHarga($request->id_menu)->first()->harga_menu;
         if (Session::get('id_order') == null) {
             $id = Order::count() + 1;
@@ -56,21 +56,23 @@ class OrderController extends Controller
             Order::create([
                 'id' => $id,
                 'user_id' => $request->user()->id,
-                'menu_id' => $request->id_menu,
                 'total_order' => $request->total_order,
                 'total_pembayaran' => $sub_total,
                 'tgl_order' => date('Y-m-d'),
-                'status_order' => 'Proses'
+                'status_order' => 'Keranjang'
             ]);
         }
         // dd(Session::get('id_order'));
         $id_order = Session::get('id_order');
-        OrderDetail::create([
-            'order_id' => $id_order,
-            'id_menu' => $request->id_menu,
-            'jml_order' => $request->total_order,
-            'sub_total' => $sub_total
-        ]);
+        for ($i = 0; $i < count($request->toping); $i++) {
+            OrderDetail::create([
+                'order_id' => $id_order,
+                'menu_id' => $request->id_menu,
+                'jml_order' => $request->total_order,
+                'toping_id' => $request->toping[$i],
+                'sub_total' => $sub_total
+            ]);
+        }
 
         return redirect()->route('cus.home');
     }

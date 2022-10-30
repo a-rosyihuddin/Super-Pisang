@@ -12,16 +12,26 @@ class OrderDetail extends Model
     protected $guarded = [];
     public function order()
     {
-        return $this->hasOne(Order::class, 'id_order', 'order');
+        return $this->belongsTo(Order::class);
     }
 
     public function menu()
     {
-        return $this->belongsTo(Menu::class, 'id_menu', 'id');
+        return $this->belongsTo(Menu::class);
+    }
+
+    public function toping()
+    {
+        return $this->belongsTo(Toping::class);
     }
 
     public static function getNewOrder()
     {
         return DB::table('Orders')->select('id')->orderByDesc('id')->limit(1);
+    }
+
+    public static function topingFilter()
+    {
+        return OrderDetail::all()->groupBy('created_at');
     }
 }
