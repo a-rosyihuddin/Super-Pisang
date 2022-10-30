@@ -41,10 +41,16 @@
                                     @endforeach
                                 </td>
                                 <td>{{ $row[0]->sub_total }}</td>
-                                <td><input type="number" class="form-control" value="{{ $row[0]->jml_order }}"
-                                        style="width: 20%"></td>
+                                <td style="width: 10%">
+                                    <input type="number" class="form-control" value="{{ $row[0]->jml_order }}"
+                                        style="width: 90%">
+                                </td>
                                 <td>{{ $row[0]->order->total_pembayaran }}</td>
-                                <td><a href="" class="btn btn-danger fa-solid fa-trash-can"></i></td>
+                                <form action="{{ '/customers/keranjang/hapus/'{$row->order->id} }}" method="POST">
+                                    @csrf
+                                    @method('delete')
+                                    <td><a href="" class="btn btn-danger fa-solid fa-trash-can"></i></td>
+                                </form>
                             </tr>
                         @endforeach
                     </tbody>

@@ -59,7 +59,6 @@ class CustomerController extends Controller
 
     public function keranjang()
     {
-        // dd(OrderDetail::topingFilter());
         return View('customer.keranjang', [
             'title' => 'Keranjang',
             'orderdetail' => OrderDetail::topingFilter(),
@@ -71,5 +70,11 @@ class CustomerController extends Controller
             'title' => 'Riwayat Order',
             'order' => Order::all(),
         ]);
+    }
+
+    public function hapusKeranjang(OrderDetail $orderdetail)
+    {
+        OrderDetail::destroy($orderdetail->id);
+        return redirect()->route('cus.keranjang');
     }
 }
