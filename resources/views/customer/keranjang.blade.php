@@ -19,12 +19,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @dd($orderdetail) --}}
-                        @php
-                            $idMenu = 0;
-                        @endphp
                         @foreach ($orderdetail as $row)
-                            {{-- @dd($row[0]) --}}
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>
@@ -33,9 +28,6 @@
                                 </td>
                                 <td>{{ $row[0]->menu->nama_menu }}</td>
                                 <td>
-                                    @php
-                                        $count = count($row);
-                                    @endphp
                                     @foreach ($row as $tp)
                                         {{ $tp->toping->nama_toping }} <br>
                                     @endforeach
@@ -46,16 +38,17 @@
                                         style="width: 90%">
                                 </td>
                                 <td>{{ $row[0]->order->total_pembayaran }}</td>
-                                <form action="{{ '/customers/keranjang/hapus/'{$row->order->id} }}" method="POST">
+                                <form action="/keranjang/hapus/{{ $row[0]->id }}" method="POST">
                                     @csrf
                                     @method('delete')
-                                    <td><a href="" class="btn btn-danger fa-solid fa-trash-can"></i></td>
+                                    <td><button class="btn btn-danger fa-solid fa-trash-can"></button></td>
                                 </form>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-                {{-- </div> --}}
+                <a href="" class="btn btn-primary">Checkout</a>
+
             </div>
         </section>
         <!-- End Team Section -->

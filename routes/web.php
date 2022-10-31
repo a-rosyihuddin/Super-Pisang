@@ -24,7 +24,7 @@ Route::middleware(['auth', 'customer'])->group(function () {
     Route::post('/pesan', [OrderController::class, 'pesan'])->name('cus.pesan');
     Route::get('/keranjang', [CustomerController::class, 'keranjang'])->name('cus.keranjang');
     Route::get('/riwayat', [CustomerController::class, 'riwayat'])->name('cus.riwayat');
-    Route::delete('/keranjang/hapus/{orderDetail:id}', [CustomerController::class, 'hapusKeranjang'])->name('cus.hapusKeranjang');
+    Route::delete('/keranjang/hapus/{orderdetail:id}', [CustomerController::class, 'hapusKeranjang'])->name('cus.hapusKeranjang');
 });
 
 //admin

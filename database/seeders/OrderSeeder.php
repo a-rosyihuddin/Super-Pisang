@@ -16,12 +16,25 @@ class OrderSeeder extends Seeder
     public function run()
     {
         Order::create([
-            'id_user' => '1',
-            'id_customer' => '2',
-            'jml_order' => '0',
-            'total_pembayaran' => 0,
+            'user_id' => 2,
+            'total_order' => 2,
+            'total_pembayaran' => 30000,
             'tgl_order' => '2022-06-15',
-            'status_order' => 'Wait'
+            'status_order' => 'Proses'
+        ]);
+        Order::create([
+            'user_id' => 2,
+            'total_order' => 3,
+            'total_pembayaran' => 10000,
+            'tgl_order' => '2022-06-15',
+            'status_order' => 'Selesai'
+        ]);
+        Order::create([
+            'user_id' => 2,
+            'total_order' => 3,
+            'total_pembayaran' => 10000,
+            'tgl_order' => '2022-06-15',
+            'status_order' => 'Siap'
         ]);
     }
 }

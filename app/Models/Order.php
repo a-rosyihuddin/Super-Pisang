@@ -12,10 +12,10 @@ class Order extends Model
     use HasFactory;
     protected $guarded = [];
 
-    // public function menu()
-    // {
-    //     return $this->belongsTo(Menu::class);
-    // }
+    public static function getRiwayat()
+    {
+        return Order::where('user_id', auth()->user()->id)->get();
+    }
 
 
     public function orderdetail()

@@ -46,13 +46,11 @@ class OrderController extends Controller
         ]);
 
         // session()->forget('id_order');
-        // dd($request->toping);
+        // dd(session()->get('id_order'));
         $sub_total = $request->total_order * Menu::getHarga($request->id_menu)->first()->harga_menu;
         if (Session::get('id_order') == null) {
             $id = Order::count() + 1;
-            // dd($id);
             session(['id_order' => $id]);
-            // dd(Session::get('id_order'));
             Order::create([
                 'id' => $id,
                 'user_id' => $request->user()->id,
@@ -62,7 +60,7 @@ class OrderController extends Controller
                 'status_order' => 'Keranjang'
             ]);
         }
-        // dd(Session::get('id_order'));
+        
         $id_order = Session::get('id_order');
         for ($i = 0; $i < count($request->toping); $i++) {
             OrderDetail::create([

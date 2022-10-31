@@ -66,15 +66,17 @@ class CustomerController extends Controller
     }
     public function riwayat()
     {
+        // dd((Order::getRiwayat()));
         return View('customer.riwayat', [
             'title' => 'Riwayat Order',
-            'order' => Order::all(),
+            'order' => Order::getRiwayat(),
+            // 'orderdetail' =>
         ]);
     }
 
     public function hapusKeranjang(OrderDetail $orderdetail)
     {
-        OrderDetail::destroy($orderdetail->id);
+        OrderDetail::where('created_at', $orderdetail->created_at)->delete();
         return redirect()->route('cus.keranjang');
     }
 }

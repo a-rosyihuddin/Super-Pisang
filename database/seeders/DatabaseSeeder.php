@@ -20,8 +20,6 @@ class DatabaseSeeder extends Seeder
             MenuSeeder::class,
             UserSeeder::class,
             TopingSeeder::class,
-            // MejaSeeder::class,
-            // CustomerSeeder::class,
             // OrderSeeder::class,
             // OrderDetailSeeder::class
         ]);
