@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Customer;
+use App\Models\DetailToping;
 use App\Models\Menu;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -21,7 +22,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             TopingSeeder::class,
             // OrderSeeder::class,
-            // OrderDetailSeeder::class
+            // OrderDetailSeeder::class,
+            // DetailTopingSeeder::class
         ]);
     }
 }

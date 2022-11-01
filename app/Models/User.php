@@ -45,4 +45,9 @@ class User extends Authenticatable
     {
         return DB::table('users')->select('level')->where('username', '=', $username)->value('level');
     }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

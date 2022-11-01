@@ -12,14 +12,26 @@ class Order extends Model
     use HasFactory;
     protected $guarded = [];
 
+    public function orderdetail()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public static function getRiwayat()
     {
         return Order::where('user_id', auth()->user()->id)->get();
     }
 
-
-    public function orderdetail()
+    public static function updatePembayaran($toping)
     {
-        return $this->hasMany(OrderDetail::class);
+        $total = 0;
+        foreach($toping as $tp){
+            $total+= $tp->toping->harga;
+        }
     }
 }

@@ -8,6 +8,8 @@ use App\Models\OrderDetail;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Models\DetailToping;
+use App\Models\Toping;
 
 class OrderController extends Controller
 {
@@ -29,7 +31,6 @@ class OrderController extends Controller
 
     public function orders()
     {
-        // $orders = Order::where('status_order', 'Proses')->with('meja')->get();
         $orders = Order::where('status_order', 'Proses')->get();
         return View('admin.orderMasuk', compact('orders'), [
             'title' => 'Orders | Admin',
@@ -48,6 +49,7 @@ class OrderController extends Controller
         // session()->forget('id_order');
         // dd(session()->get('id_order'));
         $sub_total = $request->total_order * Menu::getHarga($request->id_menu)->first()->harga_menu;
+        dd(Toping::getHarga($request->toping));
         if (Session::get('id_order') == null) {
             $id = Order::count() + 1;
             session(['id_order' => $id]);
@@ -60,15 +62,21 @@ class OrderController extends Controller
                 'status_order' => 'Keranjang'
             ]);
         }
-        
+
         $id_order = Session::get('id_order');
+        $orderdetail_id = OrderDetail::count() + 1;
+        OrderDetail::create([
+            'id' => $orderdetail_id,
+            'order_id' => $id_order,
+            'menu_id' => $request->id_menu,
+            'jml_order' => $request->total_order,
+            'sub_total' => $sub_total
+        ]);
         for ($i = 0; $i < count($request->toping); $i++) {
-            OrderDetail::create([
-                'order_id' => $id_order,
-                'menu_id' => $request->id_menu,
-                'jml_order' => $request->total_order,
-                'toping_id' => $request->toping[$i],
-                'sub_total' => $sub_total
+            DetailToping::create([
+                'orderdetail_id' => $orderdetail_id,
+                'toping_id' => $request->toping[$i]
+
             ]);
         }
 

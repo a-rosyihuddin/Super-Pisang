@@ -10,8 +10,13 @@ class Toping extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function orderdetail()
+    public function detailtoping()
     {
-        return $this->hasMany(OrderDetail::class);
+        return $this->hasMany(DetailToping::class);
+    }
+
+    public static function getHarga($id)
+    {
+        return Toping::where('id', $id)->get()->toping[0];
     }
 }

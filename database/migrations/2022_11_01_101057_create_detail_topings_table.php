@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('topings', function (Blueprint $table) {
+        Schema::create('detail_topings', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_toping');
-            $table->enum('status', ['Ready', 'Sold']);
-            $table->integer('harga');
+            $table->foreignId('orderdetail_id')->nullable()->constrained('order_details')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('toping_id')->nullable()->constrained('topings')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('topings');
+        Schema::dropIfExists('detail_topings');
     }
 };

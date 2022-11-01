@@ -61,7 +61,8 @@ class CustomerController extends Controller
     {
         return View('customer.keranjang', [
             'title' => 'Keranjang',
-            'orderdetail' => OrderDetail::topingFilter(),
+            'order' => Order::all(),
+            'orderdetail' => OrderDetail::all(),
         ]);
     }
     public function riwayat()

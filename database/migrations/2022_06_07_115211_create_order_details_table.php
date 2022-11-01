@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('menu_id')->constrained('menus')->onDelete('cascade')->onUpdate('cascade');
             $table->integer('jml_order');
             $table->integer('sub_total')->nullable();
-            $table->foreignId('toping_id')->nullable()->constrained('topings')->onDelete('cascade')->onUpdate('cascade');
+            // $table->foreignId('toping_id')->nullable()->constrained('topings')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

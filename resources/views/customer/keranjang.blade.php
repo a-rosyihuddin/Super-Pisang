@@ -19,7 +19,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($orderdetail as $row)
+                        
+                        {{-- @foreach ($orderdetail as $row)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>
@@ -44,7 +45,7 @@
                                     <td><button class="btn btn-danger fa-solid fa-trash-can"></button></td>
                                 </form>
                             </tr>
-                        @endforeach
+                        @endforeach --}}
                     </tbody>
                 </table>
                 <a href="" class="btn btn-primary">Checkout</a>

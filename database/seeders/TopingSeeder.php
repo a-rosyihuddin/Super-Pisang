@@ -17,32 +17,32 @@ class TopingSeeder extends Seeder
     {
         Toping::create([
             'nama_toping' => 'Keju',
-            'stock' => 2,
+            'status' => 'Ready',
             'harga' => 3000
         ]);
         Toping::create([
             'nama_toping' => 'Coklat',
-            'stock' => 1,
+            'status' => 'Ready',
             'harga' => 3000
         ]);
         Toping::create([
             'nama_toping' => 'Mesis',
-            'stock' => 4,
+            'status' => 'Ready',
             'harga' => 2000
         ]);
         Toping::create([
             'nama_toping' => 'Selai',
-            'stock' => 4,
+            'status' => 'Ready',
             'harga' => 2000
         ]);
         Toping::create([
             'nama_toping' => 'Cappucino',
-            'stock' => 4,
+            'status' => 'Ready',
             'harga' => 3000
         ]);
         Toping::create([
             'nama_toping' => 'Manila',
-            'stock' => 4,
+            'status' => 'Ready',
             'harga' => 3000
         ]);
     }

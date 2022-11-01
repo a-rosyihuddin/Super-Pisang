@@ -20,18 +20,13 @@ class OrderDetail extends Model
         return $this->belongsTo(Menu::class);
     }
 
-    public function toping()
+    public function detailtoping()
     {
-        return $this->belongsTo(Toping::class);
+        return $this->hasMany(DetailToping::class);
     }
 
     public static function getNewOrder()
     {
         return DB::table('Orders')->select('id')->orderByDesc('id')->limit(1);
-    }
-
-    public static function topingFilter()
-    {
-        return OrderDetail::all()->groupBy('created_at');
     }
 }
