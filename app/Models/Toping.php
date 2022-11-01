@@ -17,6 +17,6 @@ class Toping extends Model
 
     public static function getHarga($id)
     {
-        return Toping::where('id', $id)->get()->toping[0];
+        return Toping::where('id', $id)->get();
     }
 }

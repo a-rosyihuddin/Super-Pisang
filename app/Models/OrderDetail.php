@@ -29,4 +29,11 @@ class OrderDetail extends Model
     {
         return DB::table('Orders')->select('id')->orderByDesc('id')->limit(1);
     }
+
+    public static function getTotalPembayaran($id_orderdetail, $id_order)
+    {
+        dd(OrderDetail::where('id', $id_orderdetail)->get());
+        $harga = array_sum(OrderDetail::where('id', $id_orderdetail)->get());
+        Order::where('id', $id_order)->update(['harga' => $harga]);
+    }
 }

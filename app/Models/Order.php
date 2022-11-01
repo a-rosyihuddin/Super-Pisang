@@ -26,12 +26,4 @@ class Order extends Model
     {
         return Order::where('user_id', auth()->user()->id)->get();
     }
-
-    public static function updatePembayaran($toping)
-    {
-        $total = 0;
-        foreach($toping as $tp){
-            $total+= $tp->toping->harga;
-        }
-    }
 }

@@ -49,7 +49,11 @@ class OrderController extends Controller
         // session()->forget('id_order');
         // dd(session()->get('id_order'));
         $sub_total = $request->total_order * Menu::getHarga($request->id_menu)->first()->harga_menu;
-        dd(Toping::getHarga($request->toping));
+        if (count($request->toping) != 0) {
+            foreach ($request->toping as $tp) {
+                $sub_total += Toping::getHarga($tp)->first()->harga;
+            }
+        }
         if (Session::get('id_order') == null) {
             $id = Order::count() + 1;
             session(['id_order' => $id]);
@@ -65,6 +69,7 @@ class OrderController extends Controller
 
         $id_order = Session::get('id_order');
         $orderdetail_id = OrderDetail::count() + 1;
+
         OrderDetail::create([
             'id' => $orderdetail_id,
             'order_id' => $id_order,
@@ -79,6 +84,7 @@ class OrderController extends Controller
 
             ]);
         }
+        OrderDetail::getTotalPembayaran($orderdetail_id, $id_order);
 
         return redirect()->route('cus.home');
     }
