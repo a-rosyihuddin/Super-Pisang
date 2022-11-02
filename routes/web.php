@@ -25,6 +25,7 @@ Route::middleware(['auth', 'customer'])->group(function () {
     Route::get('/keranjang', [CustomerController::class, 'keranjang'])->name('cus.keranjang');
     Route::get('/riwayat', [CustomerController::class, 'riwayat'])->name('cus.riwayat');
     Route::get('/checkout', [CustomerController::class, 'checkout'])->name('cus.checkout');
+    Route::get('/checkoutcomplate', [CustomerController::class, 'checkoutcomplate'])->name('cus.checkoutcomplate');
     Route::delete('/keranjang/hapus/{orderdetail:id}', [CustomerController::class, 'hapusKeranjang'])->name('cus.hapusKeranjang');
 });
 

@@ -14,7 +14,8 @@
                             <br>
                             <span>Scan Barcode QRIS</span><br>
                             <img src="img/qrcode/qris.jpg" style="width: 200px; height: 200px;"><br>
-                            <a href="" class="btn btn-success" style="width: 100%; margin-top: 20px">Selesai</a>
+                            <a href="{{ Route('cus.checkoutcomplate') }}" class="btn btn-success"
+                                style="width: 100%; margin-top: 20px">Selesai</a>
                         </div>
                     </div>
                 </center>

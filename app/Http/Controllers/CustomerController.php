@@ -40,12 +40,10 @@ class CustomerController extends Controller
 
     public function home()
     {
-        $menu = Menu::all();
-        $toping = Toping::all();
         return View('customer.home',  [
             'title' => 'Dashboard',
-            'menu' => $menu,
-            'toping' => $toping
+            'menu' => Menu::all(),
+            'toping' => Toping::all()
         ]);
     }
 
@@ -61,7 +59,7 @@ class CustomerController extends Controller
     {
         return View('customer.keranjang', [
             'title' => 'Keranjang',
-            'orderdetail' => OrderDetail::where('order_id', session()->get('id_order'))->get(),
+            'order' => Order::where('user_id', Auth::user()->id)->where('status_order', 'Keranjang')->first(),
         ]);
     }
 
@@ -72,13 +70,21 @@ class CustomerController extends Controller
         ]);
     }
 
+    public function checkoutcomplate()
+    {
+        Order::updateStatusOrder('Proses');
+        return View('customer.home',  [
+            'title' => 'Dashboard',
+            'menu' => Menu::all(),
+            'toping' => Toping::all()
+        ]);
+    }
+
     public function riwayat()
     {
-        // dd((Order::getRiwayat()));
         return View('customer.riwayat', [
             'title' => 'Riwayat Order',
-            'order' => Order::getRiwayat(),
-            // 'orderdetail' =>
+            'order' => Order::getRiwayat(Auth::user()->id),
         ]);
     }
 

@@ -33,12 +33,13 @@ class OrderDetail extends Model
     //Mendapatkan Sub Total dari order detail menjumlahkan total menu yang di pesan serta toping
     public static function getSubTotal($toping, $total_order, $id_menu)
     {
-        $sub_total = $total_order * Menu::getHarga($id_menu)->first()->harga_menu;
-        if (count($toping) != 0) {
+        $sub_total = Menu::getHarga($id_menu)->first()->harga_menu;
+        if ($toping != null) {
             foreach ($toping as $tp) {
                 $sub_total += Toping::getHarga($tp)->first()->harga;
             }
         }
+        $sub_total *= $total_order;
         return $sub_total;
     }
 }

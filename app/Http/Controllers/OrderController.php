@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use id;
 use App\Models\Menu;
 use App\Models\Order;
+use App\Models\Toping;
 use App\Models\OrderDetail;
+use App\Models\DetailToping;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
-use App\Models\DetailToping;
-use App\Models\Toping;
 
 class OrderController extends Controller
 {
@@ -46,13 +48,12 @@ class OrderController extends Controller
             'total_order' => 'required'
         ]);
 
-        // session()->forget('id_order');
-        // dd(session()->get('id_order'));
+        // dd($request->toping);
         $orderdetail_id = OrderDetail::count() + 1;
         $sub_total = OrderDetail::getSubTotal($request->toping, $request->total_order, $request->id_menu);
-        if (Session::get('id_order') == null) {
-            $id = Order::count() + 1;
-            session(['id_order' => $id]);
+        $id = Order::count() + 1;
+        if (Auth::user()->order->where('status_order', 'Keranjang')->first() == null) {
+            // dd('tes');
             Order::create([
                 'id' => $id,
                 'user_id' => $request->user()->id,
@@ -61,9 +62,15 @@ class OrderController extends Controller
                 'tgl_order' => date('Y-m-d'),
                 'status_order' => 'Keranjang'
             ]);
+            session()->put(['id_order' => $id]);
         }
 
-        $id_order = Session::get('id_order');
+        if (Auth::user()->order->where('status_order', 'Keranjang')->first() != null) {
+            $id_order = Auth::user()->order->where('status_order', 'Keranjang')->first()->id;
+        } else {
+            $id_order = session()->get('id_order');
+        }
+
         OrderDetail::create([
             'id' => $orderdetail_id,
             'order_id' => $id_order,
@@ -71,11 +78,13 @@ class OrderController extends Controller
             'jml_order' => $request->total_order,
             'sub_total' => $sub_total
         ]);
-        for ($i = 0; $i < count($request->toping); $i++) {
-            DetailToping::create([
-                'order_detail_id' => $orderdetail_id,
-                'toping_id' => $request->toping[$i]
-            ]);
+        if ($request->toping != null) {
+            for ($i = 0; $i < count($request->toping); $i++) {
+                DetailToping::create([
+                    'order_detail_id' => $orderdetail_id,
+                    'toping_id' => $request->toping[$i]
+                ]);
+            }
         }
 
         Order::updateTotalPembayaran($id_order);
