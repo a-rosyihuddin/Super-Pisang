@@ -19,36 +19,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
-                        {{-- @foreach ($orderdetail as $row)
+                        {{-- @dd($orderdetail) --}}
+                        @foreach ($orderdetail as $row)
+                            {{-- @dd($row) --}}
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>
-                                    <img src="{{ $row[0]->menu->foto_menu }}" class="img-thumbnail"
+                                    <img src="{{ $row->menu->foto_menu }}" class="img-thumbnail"
                                         style="width: 100px; height:100px">
                                 </td>
-                                <td>{{ $row[0]->menu->nama_menu }}</td>
+                                <td>{{ $row->menu->nama_menu }}</td>
                                 <td>
-                                    @foreach ($row as $tp)
-                                        {{ $tp->toping->nama_toping }} <br>
+                                    @php
+                                        $i = 1;
+                                    @endphp
+                                    @foreach ($row->detailtoping as $dp)
+                                        <span>{{ $i++ }}. {{ $dp->toping->nama_toping }}</span><br>
                                     @endforeach
                                 </td>
-                                <td>{{ $row[0]->sub_total }}</td>
-                                <td style="width: 10%">
-                                    <input type="number" class="form-control" value="{{ $row[0]->jml_order }}"
-                                        style="width: 90%">
-                                </td>
-                                <td>{{ $row[0]->order->total_pembayaran }}</td>
-                                <form action="/keranjang/hapus/{{ $row[0]->id }}" method="POST">
+                                <td>{{ number_format($row->sub_total, 2, ',', '.') }}</td>
+                                <td>{{ $row->jml_order }}</td>
+                                <td>{{ number_format($row->sub_total / $row->jml_order, 2, ',', '.') }}</td>
+                                <form action="/keranjang/hapus/{{ $row->id }}" method="POST">
                                     @csrf
                                     @method('delete')
                                     <td><button class="btn btn-danger fa-solid fa-trash-can"></button></td>
                                 </form>
                             </tr>
-                        @endforeach --}}
+                        @endforeach
+                        <tr>
+                            <td colspan="8" style="background-color: rgb(131, 131, 253)">Total Harga : Rp.
+                                {{ number_format($row->order->total_pembayaran, 2, ',', '.') }}</td>
+                        </tr>
                     </tbody>
                 </table>
-                <a href="" class="btn btn-primary">Checkout</a>
+                <a href="{{ Route('cus.checkout') }}" class="btn btn-primary">Checkout</a>
 
             </div>
         </section>

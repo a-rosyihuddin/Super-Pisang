@@ -48,12 +48,8 @@ class OrderController extends Controller
 
         // session()->forget('id_order');
         // dd(session()->get('id_order'));
-        $sub_total = $request->total_order * Menu::getHarga($request->id_menu)->first()->harga_menu;
-        if (count($request->toping) != 0) {
-            foreach ($request->toping as $tp) {
-                $sub_total += Toping::getHarga($tp)->first()->harga;
-            }
-        }
+        $orderdetail_id = OrderDetail::count() + 1;
+        $sub_total = OrderDetail::getSubTotal($request->toping, $request->total_order, $request->id_menu);
         if (Session::get('id_order') == null) {
             $id = Order::count() + 1;
             session(['id_order' => $id]);
@@ -68,8 +64,6 @@ class OrderController extends Controller
         }
 
         $id_order = Session::get('id_order');
-        $orderdetail_id = OrderDetail::count() + 1;
-
         OrderDetail::create([
             'id' => $orderdetail_id,
             'order_id' => $id_order,
@@ -79,16 +73,15 @@ class OrderController extends Controller
         ]);
         for ($i = 0; $i < count($request->toping); $i++) {
             DetailToping::create([
-                'orderdetail_id' => $orderdetail_id,
+                'order_detail_id' => $orderdetail_id,
                 'toping_id' => $request->toping[$i]
-
             ]);
         }
-        OrderDetail::getTotalPembayaran($orderdetail_id, $id_order);
+
+        Order::updateTotalPembayaran($id_order);
 
         return redirect()->route('cus.home');
     }
-
 
     public function cariorder(StoreOrderRequest $request)
     {

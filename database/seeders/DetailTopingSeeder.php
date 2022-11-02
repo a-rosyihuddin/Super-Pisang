@@ -16,27 +16,27 @@ class DetailTopingSeeder extends Seeder
     public function run()
     {
         DetailToping::create([
-            'orderdetail_id' => 1,
+            'order_detail_id' => 1,
             'toping_id' => 1,
         ]);
         DetailToping::create([
-            'orderdetail_id' => 1,
+            'order_detail_id' => 1,
             'toping_id' => 2,
         ]);
         DetailToping::create([
-            'orderdetail_id' => 1,
+            'order_detail_id' => 1,
             'toping_id' => 3,
         ]);
         DetailToping::create([
-            'orderdetail_id' => 2,
+            'order_detail_id' => 2,
             'toping_id' => 1,
         ]);
         DetailToping::create([
-            'orderdetail_id' => 2,
+            'order_detail_id' => 2,
             'toping_id' => 3,
         ]);
         DetailToping::create([
-            'orderdetail_id' => 2,
+            'order_detail_id' => 2,
             'toping_id' => 4,
         ]);
     }

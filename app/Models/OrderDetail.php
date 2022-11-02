@@ -30,10 +30,15 @@ class OrderDetail extends Model
         return DB::table('Orders')->select('id')->orderByDesc('id')->limit(1);
     }
 
-    public static function getTotalPembayaran($id_orderdetail, $id_order)
+    //Mendapatkan Sub Total dari order detail menjumlahkan total menu yang di pesan serta toping
+    public static function getSubTotal($toping, $total_order, $id_menu)
     {
-        dd(OrderDetail::where('id', $id_orderdetail)->get());
-        $harga = array_sum(OrderDetail::where('id', $id_orderdetail)->get());
-        Order::where('id', $id_order)->update(['harga' => $harga]);
+        $sub_total = $total_order * Menu::getHarga($id_menu)->first()->harga_menu;
+        if (count($toping) != 0) {
+            foreach ($toping as $tp) {
+                $sub_total += Toping::getHarga($tp)->first()->harga;
+            }
+        }
+        return $sub_total;
     }
 }

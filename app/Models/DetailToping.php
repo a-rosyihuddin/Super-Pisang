@@ -17,4 +17,5 @@ class DetailToping extends Model
     {
         return $this->belongsTo(Toping::class);
     }
+
 }

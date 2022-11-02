@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('detail_topings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('orderdetail_id')->nullable()->constrained('order_details')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('order_detail_id')->nullable()->constrained('order_details')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('toping_id')->nullable()->constrained('topings')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

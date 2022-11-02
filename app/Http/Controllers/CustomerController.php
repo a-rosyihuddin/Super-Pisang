@@ -61,10 +61,17 @@ class CustomerController extends Controller
     {
         return View('customer.keranjang', [
             'title' => 'Keranjang',
-            'order' => Order::all(),
-            'orderdetail' => OrderDetail::all(),
+            'orderdetail' => OrderDetail::where('order_id', session()->get('id_order'))->get(),
         ]);
     }
+
+    public function checkout()
+    {
+        return View('customer.checkout', [
+            'title' => 'Pembayaran'
+        ]);
+    }
+
     public function riwayat()
     {
         // dd((Order::getRiwayat()));
@@ -77,7 +84,7 @@ class CustomerController extends Controller
 
     public function hapusKeranjang(OrderDetail $orderdetail)
     {
-        OrderDetail::where('created_at', $orderdetail->created_at)->delete();
+        OrderDetail::where('id', $orderdetail->id)->delete();
         return redirect()->route('cus.keranjang');
     }
 }
