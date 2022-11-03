@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Menu;
 use Illuminate\Routing\Controller;
 use App\Http\Requests\StoreMenuRequest;
+use App\Http\Requests\StoretopingRequest;
 use App\Http\Requests\UpdateMenuRequest;
+use App\Http\Requests\UpdatetopingRequest;
+use App\Models\Toping;
 use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
@@ -29,6 +32,15 @@ class MenuController extends Controller
         return View('admin.menu', compact('menu'), [
             'title' => 'Semua Menu | Admin',
             'judul' => 'Menu'
+        ]);
+    }
+
+    public function viewtoping()
+    {
+        $toping = Toping::all();
+        return View('admin.toping', compact('toping'), [
+            'title' => 'Semua Toping | Admin',
+            'judul' => 'Toping'
         ]);
     }
 
@@ -64,6 +76,48 @@ class MenuController extends Controller
         return redirect()->route('admin.ViewMenu')->withPesan('Menu Berhasil Di Tambah');
     }
 
+    public static function tambahToping()
+    {
+        return View('admin.tambahToping', [
+            'title' => 'Tambah Toping | Admin',
+            'judul' => 'Tambah Toping'
+        ]);
+    }
+
+    public static function tambahTopingAction(StoreTopingRequest $request)
+    {
+        $data = $request->validate([
+            'nama_toping' => 'required',
+            'status' => 'required',
+            'harga' => 'required'
+        ]);
+
+        Toping::create($data);
+        return redirect()->route('admin.ViewToping')->withPesan('Toping Berhasil Di Tambah');
+    }
+
+    public static function hapusToping(Toping $toping)
+    {
+        Toping::destroy($toping->id);
+        return redirect()->route('admin.ViewToping')->withPesan('Toping Berhasil Di Hapus');
+    }
+
+    public function editToping(Toping $toping)
+    {
+        return View('admin.editToping', compact('toping'), ['title' => 'Edit Toping | Admin', 'judul' => 'Edit Toping']);
+    }
+
+    public function editTopingAction(UpdatetopingRequest $request, Toping $toping)
+    {
+        $data = $request->validate([
+            'nama_toping' => 'required',
+            'status' => 'required',
+            'harga' => 'required'
+        ]);
+
+        $toping->update($data);
+        return redirect()->route('admin.ViewToping')->withPesan('Toping Berhasil Di Edit');
+    }
     /**
      * Display the specified resource.
      *

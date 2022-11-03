@@ -31,13 +31,26 @@ Route::middleware(['auth', 'customer'])->group(function () {
 
 //admin
 Route::middleware(['auth', 'admin'])->group(function () {
+    // Route Dashbord
     Route::get('/admin/dashboard', [UserController::class, 'adminhome'])->name('admin.home');
+    Route::get(('/admin/setsiap/{order:id}'), [UserController::class, 'setStatusSiap'])->name('admin.setStatusOrder');
+    // Route Fitur Menu
     Route::get('/admin/viewmenu', [MenuController::class, 'index'])->name('admin.ViewMenu');
-    Route::get('/admin/{menu:id}/edit', [MenuController::class, 'edit'])->name('admin.FormUpdate');
-    Route::post('/admin/{menu:id}/edit', [MenuController::class, 'update'])->name('admin.ActionFormUpdate');
-    Route::delete('/admin/hapus/{menu:id}', [MenuController::class, 'destroy'])->name('admin.HapusMenu');
     Route::get('/admin/tambah', [MenuController::class, 'create'])->name('admin.TambahMenu');
     Route::post('/admin/tambah', [MenuController::class, 'store'])->name('admin.actionTambahMenu');
+    Route::delete('/admin/hapus/{menu:id}', [MenuController::class, 'destroy'])->name('admin.HapusMenu');
+    Route::get('/admin/{menu:id}/edit', [MenuController::class, 'edit'])->name('admin.FormUpdate');
+    Route::post('/admin/{menu:id}/edit', [MenuController::class, 'update'])->name('admin.ActionFormUpdate');
+
+    //Route Fitur Toping
+    Route::get('/admin/viewtoping', [MenuController::class, 'viewtoping'])->name('admin.ViewToping');
+    Route::get('/admin/tambahtoping', [MenuController::class, 'tambahToping'])->name('admin.TambahToping');
+    Route::post('/admin/tambahtoping', [MenuController::class, 'tambahTopingAction'])->name('admin.actionTambahToping');
+    Route::delete('/admin/hapusToping/{toping:id}', [MenuController::class, 'hapusToping'])->name('admin.hapusToping');
+    Route::get('/admin/{toping:id}/edittoping', [MenuController::class, 'editToping'])->name('admin.editToping');
+    Route::post('/admin/{toping:id}/edittoping', [MenuController::class, 'editTopingAction'])->name('admin.actionEditToping');
+
+    // Route Fitur Riwayat Pemesanan
     Route::get('/admin/orders', [OrderController::class, 'orders'])->name('admin.OrderMasuk');
     Route::get('/admin/riwayat', [OrderController::class, 'riwayat'])->name('admin.RiwayatOrder');
     Route::get('/admin/detail/{order:id}', [OrderDetailController::class, 'detailOrder'])->name('admin.DetailOrder');

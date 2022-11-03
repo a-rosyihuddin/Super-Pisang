@@ -14,28 +14,22 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Foto Menu</th>
             <th>Nama Menu</th>
-            <th>Deskripsi</th>
+            <th>Status</th>
             <th>Harga</th>
-            <th>Stock</th>
             <th>Opsi</th>
           </tr>
         </thead>
         <tbody>
-          @foreach ($menu as $row)
+          @foreach ($toping as $row)
             <tr>
               <th scope="row">{{ $loop->iteration }}</th>
+              <td>{{ $row->nama_toping }}</td>
+              <td>{{ $row->status }}</td>
+              <td>{{ $row->harga }}</td>
               <td>
-                <img src="/storage/{{ $row->foto_menu }}" class="img-thumbnail" style="width: 100px; height:100px">
-              </td>
-              <td>{{ $row->nama_menu }}</td>
-              <td>{{ $row->deskripsi_menu }}</td>
-              <td>{{ $row->harga_menu }}</td>
-              <td>{{ $row->stock }}</td>
-              <td>
-                <a class="btn btn-primary" href="/admin/{{ $row->id }}/edit">Edit</a>
-                <form action="/admin/hapus/{{ $row->id }}" method="POST" class="d-inline">
+                <a class="btn btn-primary" href="/admin/{{ $row->id }}/edittoping">Edit</a>
+                <form action="/admin/hapusToping/{{ $row->id }}" method="POST" class="d-inline">
                   @csrf
                   @method('delete')
                   <button class="btn btn-danger">Hapus</button>
