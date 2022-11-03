@@ -54,7 +54,6 @@ class MenuController extends Controller
         $dataValidate = $request->validate([
             'nama_menu' => 'required',
             'deskripsi_menu' => 'required',
-            'kategori' => 'required',
             'harga_menu' => 'required',
             'stock' => 'required',
             'foto_menu' => 'required'
@@ -99,7 +98,6 @@ class MenuController extends Controller
         $dataValidate = $request->validate([
             'nama_menu' => 'required',
             'deskripsi_menu' => 'required',
-            'kategori' => 'required',
             'harga_menu' => 'required',
             'stock' => 'required',
         ]);

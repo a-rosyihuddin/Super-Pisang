@@ -49,8 +49,8 @@ Route::middleware(['auth', 'kasir'])->group(function () {
 });
 
 Route::middleware(['guest'])->group(function () {
-    Route::get('/admin/login', [UserController::class, 'loginAdmin'])->name('admin.login');
-    Route::post('/admin/login', [UserController::class, 'adminAction'])->name('admin.action');
+    Route::get('/admin', [UserController::class, 'loginAdmin'])->name('admin.login');
+    Route::post('/admin', [UserController::class, 'adminAction'])->name('admin.action');
     Route::get('/login', [CustomerController::class, 'login'])->name('cus.login');
     Route::post('/login', [CustomerController::class, 'storeLogin'])->name('cus.action');
     Route::get('/regis', [CustomerController::class, 'regis'])->name('cus.regis');

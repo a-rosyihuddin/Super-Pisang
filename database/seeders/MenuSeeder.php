@@ -20,34 +20,30 @@ class MenuSeeder extends Seeder
         Menu::create([
             'nama_menu' => 'Pisang Susu Polos',
             'deskripsi_menu' => 'Enak bingit',
-            'kategori' => 'Makanan',
             'harga_menu' => '15000',
             'stock' => '20',
-            'foto_menu' => 'img/menu/menu1.jpg'
+            'foto_menu' => 'foto_menu/menu1.jpg'
         ]);
         Menu::create([
             'nama_menu' => 'Pisang Susu Keju',
             'deskripsi_menu' => 'Enak bingit',
-            'kategori' => 'Makanan',
             'harga_menu' => '10000',
             'stock' => '20',
-            'foto_menu' => 'img/menu/menu2.png'
+            'foto_menu' => 'foto_menu/menu2.png'
         ]);
         Menu::create([
             'nama_menu' => 'Pisang Susu Coklat (Mesin)',
             'deskripsi_menu' => 'Enak bingit',
-            'kategori' => 'Dessert',
             'harga_menu' => '20000',
             'stock' => '20',
-            'foto_menu' => 'img/menu/menu3.jpg'
+            'foto_menu' => 'foto_menu/menu3.jpg'
         ]);
         Menu::create([
             'nama_menu' => 'Pisang Susu Coklat (Ori)',
             'deskripsi_menu' => 'Enak bingit',
-            'kategori' => 'Dessert',
             'harga_menu' => '20000',
             'stock' => '20',
-            'foto_menu' => 'img/menu/menu4.png'
+            'foto_menu' => 'foto_menu/menu4.png'
         ]);
     }
 }

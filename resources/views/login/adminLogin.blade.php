@@ -10,7 +10,7 @@
                     </div>
                     <div class="panel-body p-3">
 
-                        <form action="/admin/login" method="POST">
+                        <form action="{{ Route('admin.action') }}" method="POST">
                             @csrf
                             <table>
                                 <tr>

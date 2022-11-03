@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('nama_menu', 50);
             $table->string('deskripsi_menu');
-            $table->string('kategori');
             $table->integer('harga_menu');
             $table->integer('stock')->nullable();
             $table->binary('foto_menu')->nullable();

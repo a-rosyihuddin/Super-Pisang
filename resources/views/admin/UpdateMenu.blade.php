@@ -27,20 +27,6 @@
                 </div>
             </div>
             <div class="position-relative row form-group">
-                <label for="kategori" class="col-sm-2 col-form-label">Kategori</label>
-                <div class="col-sm-10">
-                    <select name="kategori" id="kategori" class="form-control @error('kategori') is-invalid @enderror">
-                        <option value="">--Pilih--</option>
-                        <option value="Makanan" {{ ($menu->kategori=== 'Makanan')?'selected':'' }}>Makanan</option>
-                        <option value="Minuman" {{ ($menu->kategori=== 'Minuman')?'selected':'' }}>Minuman</option>
-                        <option value="Dessert" {{ ($menu->kategori=== 'Dessert')?'selected':'' }}>Deseert</option>
-                    </select>
-                    @error('kategori')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="position-relative row form-group">
                 <label for="hargaMenu" class="col-sm-2 col-form-label">Harga Menu</label>
                 <div class="col-sm-10">
                     <input name="harga_menu" id="hargaMenu" placeholder="Masukkan Harga Menu" type="number"
