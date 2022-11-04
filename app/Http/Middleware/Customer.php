@@ -16,7 +16,6 @@ class Customer
      */
     public function handle(Request $request, Closure $next)
     {
-        // dd(auth());
         if (auth()->user()->level == 'Customer') {
             return $next($request);
         } else {

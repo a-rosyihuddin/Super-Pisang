@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\MenuController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\OrderDetailController;
-use App\Http\Controllers\UserController;
 use App\Http\Middleware\Customer;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OrderDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +27,10 @@ Route::middleware(['auth', 'customer'])->group(function () {
     Route::get('/checkout', [CustomerController::class, 'checkout'])->name('cus.checkout');
     Route::get('/checkoutcomplate', [CustomerController::class, 'checkoutcomplate'])->name('cus.checkoutcomplate');
     Route::delete('/keranjang/hapus/{orderdetail:id}', [CustomerController::class, 'hapusKeranjang'])->name('cus.hapusKeranjang');
+    Route::get('/account', [CustomerController::class, 'account'])->name('cus.account');
+    Route::get('/hapusakun/{user}', [CustomerController::class, 'hapusAkun'])->name('cus.hapusAkun');
+    Route::get('/{user}/editAkun', [CustomerController::class, 'editAkun'])->name('cus.editAkun');
+    Route::post('/{user}/editAkunAction', [CustomerController::class, 'editAkunAction'])->name('cus.editAkunAction');
 });
 
 //admin

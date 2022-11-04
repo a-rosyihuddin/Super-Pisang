@@ -20,8 +20,9 @@
 
   <!-- Vendor CSS Files -->
   <link href="../vendor/css/bootstrap.min.css" rel="stylesheet" />
-
-  <!-- Template Main CSS File -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css"
+    <!-- Template Main CSS File -->
   <link href="../vendor/css/style.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" />
 </head>
@@ -46,8 +47,8 @@
 
           <li class="tombol">
             @auth
-              <a class="nav-link scrollto" href="{{ Route('cus.logout') }}">
-                <button id="tombol-login">Logout</button>
+              <a href="{{ Route('cus.account') }}">
+                <span class="fa-solid fa-user-large ml-2 opacity-8"></span>
               </a>
             @else
               <a class="nav-link scrollto" href="{{ Route('cus.login') }}">

@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use App\Models\Toko;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Toping;
 use App\Models\OrderDetail;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreCustomerRequest;
+use App\Http\Requests\StoreUserRequest;
+use Illuminate\Support\Facades\Hash;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class CustomerController extends Controller
@@ -37,6 +40,20 @@ class CustomerController extends Controller
     public function regis()
     {
         return View('login.cusRegis', ['title' => 'Register']);
+    }
+
+    public function storeRegis(StoreUserRequest $request)
+    {
+        $data = $request->validate([
+            'nama' => 'required',
+            'no_hp' => 'required |unique:users,no_hp,id',
+            'password' => 'required'
+        ]);
+        $data['level'] = 'Customer';
+        $data['password'] = Hash::make($request->password);
+        $data['toko_id'] = 1;
+        User::create($data);
+        return redirect()->route('cus.login');
     }
 
     public function home()
@@ -93,5 +110,50 @@ class CustomerController extends Controller
     {
         OrderDetail::where('id', $orderdetail->id)->delete();
         return redirect()->route('cus.keranjang');
+    }
+
+    public function account()
+    {
+        return View('customer.account', [
+            'title' => 'Account',
+            'user' => Auth::user()
+        ]);
+    }
+
+    public function hapusAkun(User $user)
+    {
+        $user->delete();
+        return redirect()->route('cus.login');
+    }
+
+    public function editAkun(User $user)
+    {
+        return View('customer.editAccount', [
+            'title' => 'Edit Akun',
+            'user' => $user
+        ]);
+    }
+
+
+    public function editAkunAction(StoreUserRequest $request, User $user)
+    {
+        // $data = $request->validate([
+        //     'no_hp' => 'required',
+        // $data = [
+        //     'nama' => $request->nama,
+        //     'no_hp' => $request->no_hp,
+        //     'level' => 'Customer'
+        // ];
+
+        // $data['level'] = 'Customer';
+        // $data['password'] = Hash::make($request->password);
+        // $data['toko_id'] = 1;
+        dd($request->password);
+        User::where('id', $user->id)->first()->update([
+            'nama' => $request->nama,
+            'no_hp' => $request->no_hp,
+            'level' => 'Customer'
+        ]);
+        return redirect()->route('cus.account');
     }
 }
