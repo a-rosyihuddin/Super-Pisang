@@ -24,22 +24,22 @@ class OrderController extends Controller
      */
     public function riwayat()
     {
-        $riwayat = Order::where('status_order', 'Proses')->get();
-        return View('admin.riwayatOrder', compact('riwayat'), [
+        return View('admin.riwayatOrder', [
             'title' => 'Riwayat Orders | Admin',
             'judul' => 'Riwayat Orders',
-            'back' => 'admin.RiwayatOrder'
+            'back' => 'admin.RiwayatOrder',
+            'order' => Order::where('status_order', 'Selesai')->get()
         ]);
     }
 
 
     public function orders()
     {
-        $orders = Order::where('status_order', 'Proses')->get();
-        return View('admin.orderMasuk', compact('orders'), [
-            'title' => 'Orders | Admin',
-            'judul' => 'Orders',
-            'back' => 'admin.OrderMasuk'
+        return View('admin.orderMasuk', [
+            'title' => 'Order | Admin',
+            'judul' => 'Pesanan Siap Di Ambil',
+            'back' => 'admin.OrderMasuk',
+            'order' => Order::where('status_order', 'Siap')->get()
         ]);
     }
 
@@ -94,21 +94,15 @@ class OrderController extends Controller
         return redirect()->route('cus.home');
     }
 
-    public function cariorder(StoreOrderRequest $request)
-    {
-        $order = Order::where('id', $request->id_cus)->with(['orderdetail.menu'])->get();
-
-        if (count($order)) {
-            return redirect()->route('kasir.home')->with(compact('order'));
-        } else {
-            return redirect()->route('kasir.home');
-        }
-    }
-
     public function setStatusSiap(Order $order)
     {
-        $order->update(['status_order' => 'Siap']);
-        return redirect()->route('admin.home');
+        if ($order->status_order == 'Proses') {
+            $order->update(['status_order' => 'Siap']);
+            return redirect()->route('admin.home');
+        } elseif ($order->status_order == 'Siap') {
+            $order->update(['status_order' => 'Selesai']);
+            return redirect()->route('admin.OrderMasuk');
+        }
     }
 
     public function updateBatasOrder(StoreTokoRequest $request, Toko $toko)

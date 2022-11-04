@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Models\Toko;
 use App\Models\Order;
 use App\Models\Toping;
+use App\Models\OrderDetail;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreCustomerRequest;
-use App\Models\OrderDetail;
 use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class CustomerController extends Controller
@@ -43,7 +44,9 @@ class CustomerController extends Controller
         return View('customer.home',  [
             'title' => 'Dashboard',
             'menu' => Menu::all(),
-            'toping' => Toping::all()
+            'toping' => Toping::all(),
+            'totalOrder' => Order::where('status_order', 'Proses')->get()->count(),
+            'batasOrder' => Toko::first()->batas_order
         ]);
     }
 
@@ -60,6 +63,8 @@ class CustomerController extends Controller
         return View('customer.keranjang', [
             'title' => 'Keranjang',
             'order' => Order::where('user_id', Auth::user()->id)->where('status_order', 'Keranjang')->first(),
+            'totalOrder' => Order::where('status_order', 'Proses')->get()->count(),
+            'batasOrder' => Toko::first()->batas_order
         ]);
     }
 
@@ -73,11 +78,7 @@ class CustomerController extends Controller
     public function checkoutcomplate()
     {
         Order::updateStatusOrder('Proses');
-        return View('customer.home',  [
-            'title' => 'Dashboard',
-            'menu' => Menu::all(),
-            'toping' => Toping::all()
-        ]);
+        return redirect()->intended(route('cus.home'));
     }
 
     public function riwayat()
@@ -93,5 +94,4 @@ class CustomerController extends Controller
         OrderDetail::where('id', $orderdetail->id)->delete();
         return redirect()->route('cus.keranjang');
     }
-
 }

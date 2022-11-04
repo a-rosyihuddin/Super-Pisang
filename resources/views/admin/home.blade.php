@@ -115,7 +115,8 @@
                     </p>
                   </div>
                 </div>
-                <a href="/admin/updatestatus/{{ $row->id }}" class="btn btn-success" style="width: 100%">Selesai</a>
+                <a href="/admin/updatestatus/{{ $row->id }}" class="btn btn-warning" style="width: 100%">Siap Di
+                  Ambil</a>
               </div>
             </div>
           </div>

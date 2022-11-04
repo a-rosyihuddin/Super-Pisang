@@ -60,7 +60,7 @@
             @endif
           </tbody>
         </table>
-        @if ($order != null && $order->orderdetail->first() != null)
+        @if ($order != null && $order->orderdetail->first() != null && $totalOrder != $batasOrder)
           <a href="{{ Route('cus.checkout') }}">
             <button class="btn btn-primary">Checkout</button>
           </a>

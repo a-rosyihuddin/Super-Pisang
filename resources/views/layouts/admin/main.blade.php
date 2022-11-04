@@ -181,12 +181,12 @@
                   <li>
                     <a href="{{ Route('admin.OrderMasuk') }}">
                       <i class="metismenu-icon"></i>
-                      Order Masuk
+                      Pesanan Siap Di Ambil
                     </a>
                   </li>
                   <li>
                     <a href="{{ Route('admin.RiwayatOrder') }}">
-                      <i class="metismenu-icon"> </i>Riwayat Order
+                      <i class="metismenu-icon"> </i>Pesanan Selesai
                     </a>
                   </li>
                 </ul>

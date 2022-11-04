@@ -29,42 +29,78 @@
                   </div>
                 </a>
               </div>
-
-              <!-- Tambah Modal HTML -->
-              <div id="idMenu{{ $row->id }}" class="modal fade">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title">Silah Masukan Pesanan Anda</h4>
-                      <button type="button" class="btn btn-close" data-dismiss="modal" aria-hidden="true"></button>
-                    </div>
-                    <div class="modal-body" style="flex: 20%">
-                      {{-- <table> --}}
-                      <form action="{{ Route('cus.pesan') }}" method="POST">
-                        @csrf
-                        <label for="toping">Toping</label><br>
-                        {{-- Menampilkan Toping --}}
-                        <div data-toggle="buttons">
-                          @foreach ($toping as $tp)
-                            <label class="btn btn-block btn-success active"" style="margin: 1%">{{ $tp->nama_toping }}
-                              <input type="checkbox" name="toping[]" value="{{ $tp->id }}" autocomplete="off">
-                            </label>
-                          @endforeach
+              @if ($totalOrder != $batasOrder)
+                <!-- Tambah Modal HTML -->
+                <div id="idMenu{{ $row->id }}" class="modal fade">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Silah Masukan Pesanan Anda</h4>
+                        <button type="button" class="btn btn-close" data-dismiss="modal" aria-hidden="true"></button>
+                      </div>
+                      <div class="modal-body" style="flex: 20%">
+                        {{-- <table> --}}
+                        <form action="{{ Route('cus.pesan') }}" method="POST">
+                          @csrf
+                          <label for="toping">Toping</label><br>
+                          {{-- Menampilkan Toping --}}
+                          <div data-toggle="buttons">
+                            @foreach ($toping as $tp)
+                              <label class="btn btn-block btn-success active"" style="margin: 1%">{{ $tp->nama_toping }}
+                                <input type="checkbox" name="toping[]" value="{{ $tp->id }}" autocomplete="off">
+                              </label>
+                            @endforeach
+                          </div>
+                          <br>
+                          <label for="jml_order">Jumlah</label>
+                          <input type="number" class="form-control" name="total_order">
+                          <input type="hidden" class="form-control" name="id_menu" value="{{ $row->id }}">
+                          <button type="submit" class="btn btn-primary"
+                            style="margin-top:2%; margin-bottom : 2%;">Tambah</button>
+                        </form>
+                        <div class="modal-footer">
+                          <input type="button" class="btn btn-danger" data-dismiss="modal" value="Close" />
                         </div>
-                        <br>
-                        <label for="jml_order">Jumlah</label>
-                        <input type="number" class="form-control" name="total_order">
-                        <input type="hidden" class="form-control" name="id_menu" value="{{ $row->id }}">
-                        <button type="submit" class="btn btn-primary"
-                          style="margin-top:2%; margin-bottom : 2%;">Tambah</button>
-                      </form>
-                      <div class="modal-footer">
-                        <input type="button" class="btn btn-danger" data-dismiss="modal" value="Close" />
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              @else
+                <div id="idMenu{{ $row->id }}" class="modal fade">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Silah Masukan Pesanan Anda</h4>
+                        <button type="button" class="btn btn-close" data-dismiss="modal" aria-hidden="true"></button>
+                      </div>
+                      <div class="modal-body" style="flex: 20%">
+                        {{-- <table> --}}
+                        <form action="{{ Route('cus.pesan') }}" method="POST">
+                          @csrf
+                          <label for="toping">Toping</label><br>
+                          {{-- Menampilkan Toping --}}
+                          <div data-toggle="buttons">
+                            @foreach ($toping as $tp)
+                              <label class="btn btn-block btn-success active"" style="margin: 1%">{{ $tp->nama_toping }}
+                                <input type="checkbox" name="toping[]" value="{{ $tp->id }}" autocomplete="off">
+                              </label>
+                            @endforeach
+                          </div>
+                          <br>
+                          <label for="jml_order">Jumlah</label>
+                          <input type="number" class="form-control" name="total_order">
+                          <input type="hidden" class="form-control" name="id_menu" value="{{ $row->id }}">
+                          <button type="submit" class="btn btn-primary" style="margin-top:2%; margin-bottom : 2%;"
+                            disabled>Tambah</button>
+                        </form>
+                        <div class="modal-footer">
+                          <input type="button" class="btn btn-danger" data-dismiss="modal" value="Close" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              @endif
             @endforeach
           </div>
         </div>
