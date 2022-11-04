@@ -228,6 +228,18 @@
                     </span>Tambah
                   </a>
                 </div>
+              @elseif ($judul == 'Dashboard')
+                <div class="page-title-actions">
+                  <form class="form-inline " action="/admin/updatebatasorder/1" method="POST">
+                    @csrf
+                    <div class="input-field search" style="margin-top: 2%">
+                      <input class="form-control" type="text" placeholder="Set Batas Order"
+                        aria-label="Set Batas Order" name="batas_order">
+                      <button type="submit" class="btn btn-outline-primary"><i
+                          class="fa-solid fa-square-check fa-2xl"></i></button>
+                    </div>
+                  </form>
+                </div>
               @endif
             </div>
           </div>

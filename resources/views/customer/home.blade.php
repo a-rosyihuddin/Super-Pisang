@@ -11,7 +11,6 @@
               <input class="form-control" type="text" placeholder="Search" aria-label="Search">
             </div>
           </form>
-
         </div>
         <div class="row">
           <div class="row">

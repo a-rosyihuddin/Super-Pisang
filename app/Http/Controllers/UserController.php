@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Toko;
 use App\Models\User;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -20,6 +21,8 @@ class UserController extends Controller
             'title' => 'Dashboard | Admin',
             'judul' => 'Dashboard',
             'order' => Order::all(),
+            'toko' => Toko::first(),
+            // 'total_order' => Order::
         ]);
     }
 
@@ -49,12 +52,5 @@ class UserController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerate();
         return redirect()->route('admin.login');
-    }
-
-    public function setStatusSiap(Order $order)
-    {
-        dd($order);
-        $order->update(['status_order' => 'Siap']);
-        return redirect()->route('admin.home');
     }
 }

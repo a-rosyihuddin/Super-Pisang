@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use id;
 use App\Models\Menu;
+use App\Models\Toko;
 use App\Models\Order;
 use App\Models\Toping;
 use App\Models\OrderDetail;
@@ -11,6 +12,7 @@ use App\Models\DetailToping;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\StoreOrderRequest;
+use App\Http\Requests\StoreTokoRequest;
 use App\Http\Requests\UpdateOrderRequest;
 
 class OrderController extends Controller
@@ -103,37 +105,16 @@ class OrderController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Order $order)
+    public function setStatusSiap(Order $order)
     {
-        //
+        $order->update(['status_order' => 'Siap']);
+        return redirect()->route('admin.home');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateOrderRequest  $request
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateOrderRequest $request, Order $order)
+    public function updateBatasOrder(StoreTokoRequest $request, Toko $toko)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Order $order)
-    {
-        //
+        // dd($request->batas_order);
+        $toko->update(['batas_order' => $request->batas_order]);
+        return redirect()->route('admin.home');
     }
 }

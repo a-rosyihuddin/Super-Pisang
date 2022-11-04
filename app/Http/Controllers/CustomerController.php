@@ -93,4 +93,5 @@ class CustomerController extends Controller
         OrderDetail::where('id', $orderdetail->id)->delete();
         return redirect()->route('cus.keranjang');
     }
+
 }

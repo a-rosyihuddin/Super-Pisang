@@ -33,7 +33,8 @@ Route::middleware(['auth', 'customer'])->group(function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     // Route Dashbord
     Route::get('/admin/dashboard', [UserController::class, 'adminhome'])->name('admin.home');
-    Route::get(('/admin/setsiap/{order:id}'), [UserController::class, 'setStatusSiap'])->name('admin.setStatusOrder');
+    Route::get('/admin/updatestatus/{order:id}', [OrderController::class, 'setStatusSiap'])->name('admin.setStatusOrder');
+    Route::post('/admin/updatebatasorder/{toko:id}', [OrderController::class, 'updateBatasOrder'])->name('admin.updateBatasOrder');
     // Route Fitur Menu
     Route::get('/admin/viewmenu', [MenuController::class, 'index'])->name('admin.ViewMenu');
     Route::get('/admin/tambah', [MenuController::class, 'create'])->name('admin.TambahMenu');

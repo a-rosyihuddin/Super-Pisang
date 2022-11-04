@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('tokos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('toko_id')->constrained('tokos')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('no_hp', 20)->unique();
-            $table->string('nama', 100);
-            $table->string('password');
-            $table->string('level', 20);
+            $table->string('nama_toko');
+            $table->integer('batas_order');
+            $table->enum('status', ['Buka', 'Tutup']);
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('tokos');
     }
 };
