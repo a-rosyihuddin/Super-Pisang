@@ -137,23 +137,15 @@ class CustomerController extends Controller
 
     public function editAkunAction(StoreUserRequest $request, User $user)
     {
-        // $data = $request->validate([
-        //     'no_hp' => 'required',
-        // $data = [
-        //     'nama' => $request->nama,
-        //     'no_hp' => $request->no_hp,
-        //     'level' => 'Customer'
-        // ];
-
-        // $data['level'] = 'Customer';
-        // $data['password'] = Hash::make($request->password);
-        // $data['toko_id'] = 1;
-        dd($request->password);
-        User::where('id', $user->id)->first()->update([
-            'nama' => $request->nama,
-            'no_hp' => $request->no_hp,
-            'level' => 'Customer'
+        $data = $request->validate([
+            'nama' => 'required',
+            'no_hp' => 'required',
         ]);
+        $data['level'] = 'Customer';
+        $data['password'] = Hash::make($request->password);
+        $data['toko_id'] = 1;
+        // dd(User::where('id', $user->id)->first()->update($data));
+        User::where('id', $user->id)->first()->update($data);
         return redirect()->route('cus.account');
     }
 }
