@@ -21,31 +21,82 @@
                         <p class="mb-0">
                         <table style="width: 225px">
                           @foreach ($row->orderdetail as $od)
-                            <tr>
-                              <td>
-                                <span style="color: black">{{ $loop->iteration }}.
-                                  {{ $od->menu->nama_menu }}</span>
-                              </td>
-                              <td> {{ $od->jml_order }}x</td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <span style="color: rgb(75, 61, 61)">Extra Toping</span><br>
-                                @foreach ($od->detailtoping as $dp)
-                                  <span style="color: rgb(53, 32, 32)"> *
-                                    {{ $dp->toping->nama_toping }}</span><br>
-                                @endforeach
-                              </td>
-                            </tr>
+                            @if ($loop->iteration < 2)
+                              <tr>
+                                <td>
+                                  <span style="color: black">{{ $loop->iteration }}.
+                                    {{ $od->menu->nama_menu }}</span>
+                                </td>
+                                <td> {{ $od->jml_order }}x</td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <span style="color: rgb(75, 61, 61)">Extra Toping</span><br>
+                                  @foreach ($od->detailtoping as $dp)
+                                    <span style="color: rgb(53, 32, 32)"> *
+                                      {{ $dp->toping->nama_toping }}</span><br>
+                                  @endforeach
+                                </td>
+                              </tr>
+                            @endif
                           @endforeach
                         </table>
                         </p>
                       </div>
                     </div>
-                    <span class="btn btn-secondary" style="width: 100%">Dalam Antrian</span>
+                    <span class="btn btn-secondary" style="width: 79%">Dalam Antrian</span>
+                    <a href="#" class="btn btn-info" data-toggle="modal"
+                      data-target="#idPesanan{{ $row->id }}""><i class="fa-solid fa-circle-info"></i></a>
                   </div>
                 </div>
               </div>
+
+              <!-- Tambah Modal HTML -->
+              <div id="idPesanan{{ $row->id }}" class="modal fade">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Detail Order</h4>
+                      <button type="button" class="btn btn-close" data-dismiss="modal" aria-hidden="true"></button>
+                    </div>
+                    <div class="modal-body" style="flex: 20%">
+                      <table style="width: 100%">
+                        <th>Menu</th>
+                        <th>Jumlah Order</th>
+                        <th>Harga</th>
+                        @foreach ($row->orderdetail as $od)
+                          <tr>
+                            <td>
+                              <span style="color: black">{{ $loop->iteration }}.
+                                {{ $od->menu->nama_menu }}</span>
+                            </td>
+                            <td> {{ $od->jml_order }}x</td>
+                            <td>{{ number_format($od->sub_total / $od->jml_order, 2, ',', '.') }}</td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <span style="color: rgb(75, 61, 61)">Extra Toping</span><br>
+                              @foreach ($od->detailtoping as $dp)
+                                <span style="color: rgb(53, 32, 32)"> *
+                                  {{ $dp->toping->nama_toping }}</span><br>
+                              @endforeach
+                            </td>
+                          </tr>
+                        @endforeach
+                        <tr>
+                          <td colspan="2" style="background-color: rgb(238, 238, 242)">Total Harga : </td>
+                          <td style="background-color: rgb(238, 238, 242)">Rp.
+                            {{ number_format($od->order->total_pembayaran, 2, ',', '.') }}</td>
+                        </tr>
+                      </table>
+                      <div class="modal-footer">
+                        <input type="button" class="btn btn-danger" data-dismiss="modal" value="Close" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {{-- Akhir Modal --}}
             @elseif ($row->status_order == 'Siap')
               <div class="col-xl-3 col-sm-6">
                 <div class="card" style=" border-radius:1.5rem">

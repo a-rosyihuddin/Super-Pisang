@@ -26,6 +26,7 @@ Route::middleware(['auth', 'customer'])->group(function () {
     Route::get('/riwayat', [CustomerController::class, 'riwayat'])->name('cus.riwayat');
     Route::get('/checkout', [CustomerController::class, 'checkout'])->name('cus.checkout');
     Route::get('/checkoutcomplate', [CustomerController::class, 'checkoutcomplate'])->name('cus.checkoutcomplate');
+    // Route::get('/nota', [CustomerController::class, 'nota'])->name('cus.nota');
     Route::delete('/keranjang/hapus/{orderdetail:id}', [CustomerController::class, 'hapusKeranjang'])->name('cus.hapusKeranjang');
     Route::get('/account', [CustomerController::class, 'account'])->name('cus.account');
     Route::get('/hapusakun/{user}', [CustomerController::class, 'hapusAkun'])->name('cus.hapusAkun');
@@ -59,11 +60,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/orders', [OrderController::class, 'orders'])->name('admin.OrderMasuk');
     Route::get('/admin/riwayat', [OrderController::class, 'riwayat'])->name('admin.RiwayatOrder');
     Route::get('/admin/detail/{order:id}', [OrderDetailController::class, 'detailOrder'])->name('admin.DetailOrder');
-});
-
-Route::middleware(['auth', 'kasir'])->group(function () {
-    Route::get('/kasir/dashboard', [UserController::class, 'kasirhome'])->name('kasir.home');
-    Route::post('/kasir/cariorder', [OrderController::class, 'cariorder'])->name('kasir.CariOrder');
 });
 
 Route::middleware(['guest'])->group(function () {
