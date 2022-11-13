@@ -8,7 +8,7 @@
             <div class="row">
               <div class="col-9">
                 <div class="numbers">
-                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Batas Order Masuk</p>
+                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Batas Pesanan Masuk</p>
                   <h5 class="font-weight-bolder">
                     {{ $toko->batas_order }}
                   </h5>
@@ -27,7 +27,7 @@
             <div class="row">
               <div class="col-9">
                 <div class="numbers">
-                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Jumlah Order Masuk</p>
+                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Jumlah Pesanan Masuk</p>
                   <h5 class="font-weight-bolder">
                     {{ $order->where('status_order', 'Proses')->count() }}
                   </h5>
@@ -46,7 +46,7 @@
             <div class="row">
               <div class="col-9">
                 <div class="numbers">
-                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Jumlah Order Siap Di ambil</p>
+                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Jumlah Pesanan Siap</p>
                   <h5 class="font-weight-bolder">
                     {{ $order->where('status_order', 'Siap')->count() }}
                   </h5>
@@ -115,8 +115,8 @@
                     </p>
                   </div>
                 </div>
-                <a href="/admin/updatestatus/{{ $row->id }}" class="btn btn-warning" style="width: 100%">Siap Di
-                  Ambil</a>
+                <a href="/admin/updatestatus/{{ $row->id }}" class="btn btn-warning" style="width: 100%">Pesanan
+                  Siap</a>
               </div>
             </div>
           </div>

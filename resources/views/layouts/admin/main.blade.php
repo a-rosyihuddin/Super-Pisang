@@ -53,17 +53,13 @@
         </span>
       </div>
       <div class="app-header__content">
-        <div class="app-header-left">
-          <div class="search-wrapper">
-            <div class="input-holder">
-              <input type="text" class="search-input" placeholder="Type to search" />
-              <button class="search-icon">
-                <span></span>
-              </button>
-            </div>
-            <button class="close"></button>
-          </div>
+        <span>Tutup</span>
+        <!-- Default switch -->
+        <div class="custom-control custom-switch">
+          <input type="checkbox" class="custom-control-input" id="customSwitches">
+          <label class="custom-control-label" for="customSwitches">Buka</label>
         </div>
+
         <div class="app-header-right">
           <div class="header-btn-lg pr-0">
             <div class="widget-content p-0">
@@ -79,12 +75,6 @@
                           Ahmad Rosyihuddin
                         </div>
                       </h6>
-                      <button type="button" tabindex="0" class="dropdown-item">
-                        User Account
-                      </button>
-                      <button type="button" tabindex="0" class="dropdown-item">
-                        Settings
-                      </button>
                       <div tabindex="-1" class="dropdown-divider"></div>
                       <form action="{{ Route('admin.logout') }}" method="POST">
                         @csrf
@@ -180,12 +170,12 @@
                   <li>
                     <a href="{{ Route('admin.OrderMasuk') }}">
                       <i class="metismenu-icon"></i>
-                      Pesanan Siap Di Ambil
+                      Pesanan Siap
                     </a>
                   </li>
                   <li>
                     <a href="{{ Route('admin.RiwayatOrder') }}">
-                      <i class="metismenu-icon"> </i>Pesanan Selesai
+                      <i class="metismenu-icon"> </i>Riwayat Pesanan
                     </a>
                   </li>
                 </ul>

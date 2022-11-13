@@ -1,7 +1,7 @@
-@extends('layouts.customer.main')
+@extends('layouts.customer.landingpage')
 @section('container')
   <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
+  <section id="hero" class="d-flex align-items-center" style="height: 95%">
     <div class="container">
       <div class="row">
         <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center pesan">
@@ -9,7 +9,7 @@
           <h2>Aneka Pisang Keju dengan berbagai varian rasa dan toping</h2>
           <div>
             <a href="{{ Route('cus.login') }}" class="button">
-              <button>Pesan</button>
+              <button>Lanjut</button>
             </a>
           </div>
         </div>

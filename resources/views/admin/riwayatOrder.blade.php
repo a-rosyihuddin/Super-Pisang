@@ -44,7 +44,7 @@
                 </p>
               </div>
             </div>
-            <a href="/admin/updatestatus/{{ $row->id }}" class="btn btn-success" style="width: 100%">Selesai</a>
+            <span class="btn btn-success" style="width: 100%">Selesai</span>
           </div>
         </div>
       </div>

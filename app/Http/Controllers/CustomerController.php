@@ -63,7 +63,7 @@ class CustomerController extends Controller
             'menu' => Menu::all(),
             'toping' => Toping::all(),
             'totalOrder' => Order::where('status_order', 'Proses')->get()->count(),
-            'batasOrder' => Toko::first()->batas_order
+            'toko' => Toko::first(),
         ]);
     }
 
