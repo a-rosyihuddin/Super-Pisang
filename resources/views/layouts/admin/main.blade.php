@@ -53,13 +53,6 @@
         </span>
       </div>
       <div class="app-header__content">
-        <span>Tutup</span>
-        <!-- Default switch -->
-        <div class="custom-control custom-switch">
-          <input type="checkbox" class="custom-control-input" id="customSwitches">
-          <label class="custom-control-label" for="customSwitches">Buka</label>
-        </div>
-
         <div class="app-header-right">
           <div class="header-btn-lg pr-0">
             <div class="widget-content p-0">

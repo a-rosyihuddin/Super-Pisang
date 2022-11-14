@@ -21,7 +21,7 @@
                   </div>
                 </a>
               </div>
-              @if ($totalOrder != $toko->batas_order and $toko->status == 'Buka')
+              @if ($totalOrder != $toko->batas_order)
                 <!-- Tambah Modal HTML -->
                 <div id="idMenu{{ $row->id }}" class="modal fade">
                   <div class="modal-dialog">
@@ -76,8 +76,8 @@
                         <button type="button" class="btn btn-close" data-dismiss="modal" aria-hidden="true"></button>
                       </div>
                       <div class="modal-body" style="flex: 20%">
-                        <span>Mohon Maaf Toko Sedang Tutup/ Pemesanan Sudah Mencapai Batas Maksimal Mohon cek secara
-                          berkala untuk melakukan pesanan</span>
+                        <span>Mohon Maaf Toko saat ini sedang tutup. Silahkan melakukan pesanan besok dari pukul
+                          16.00-21.00</span>
                       </div>
                     </div>
                   </div>
